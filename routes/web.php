@@ -7,5 +7,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/lay', function () {
+    return view('layout.app');
+});
+
+
 Route::get('barang', [BarangController::class, 'index'])->name('read.barang');
 Route::post('create-barang', [BarangController::class,'create'])->name('create.barang');
