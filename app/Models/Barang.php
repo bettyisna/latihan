@@ -13,3 +13,4 @@ class Barang extends Model
         "is_active",
     ] ;
 }
+

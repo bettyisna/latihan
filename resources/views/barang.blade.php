@@ -63,7 +63,9 @@
         <h1>Nama Barang adalah: {{ $barang->nama_barang }}</h1>
         <h2>Jumlah: {{ $barang->jumlah }} </h2>
         <img src="{{ asset($barang->gambar) }}" alt="">
-
+        <br>
+        <a href="{{ route ('edit.barang',$barang->id)}}">Edit</a>
+        <hr>
     @endforeach
 
     @endsection

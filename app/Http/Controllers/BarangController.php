@@ -54,11 +54,31 @@ class BarangController extends Controller
         ->with('success', 'Product created successfully.');
     }
 
+    //show edit form
     public function edit($id){
         $barang = Barang::find($id);
+        return view('edit.barang', compact('barang'));
+
     }
 
+    //update data in database
     public function update(Request $request, $id){
+        $request->validate([
+            'nama_barang' => 'required',
+            'jumlah' => 'required|integer',
+            'gambar' => 'required|longtext',
+            'is_active' => 'required|boolean'
+        ]);
+
+        $barang = Barang::findOrFail($id);
+        $barang->update([
+            'nama_barang' => $request->nama,
+            'jumlah' => $request->jumlah,
+            'gambar' => $request->gambar,
+            'is_active' => $request->is_active,
+        ]);
+
+        return redirect()->route('edit.barang', $id)->with('success', 'Barang berhasil diperbarui!');
 
     }
 
