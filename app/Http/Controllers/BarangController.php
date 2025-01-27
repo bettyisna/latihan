@@ -57,29 +57,40 @@ class BarangController extends Controller
     //show edit form
     public function edit($id){
         $barang = Barang::find($id);
-        return view('edit.barang', compact('barang'));
+        return view('edit', compact('barang'));
 
     }
 
-    //update data in database
-    public function update(Request $request, $id){
-        $request->validate([
-            'nama_barang' => 'required',
-            'jumlah' => 'required|integer',
-            'gambar' => 'required|longtext',
-            'is_active' => 'required|boolean'
-        ]);
+    public function update(Request $request, $id)
+    {
+        // Find the barang by ID
+        
+        $barang = Barang::findOrFail($id); 
+        
+        // Validate the incoming data (you can add your validation rules here)
+        $validated = $request->validate([
+        'nama_barang' => 'required|string|max:255',
+        'jumlah' => 'required|integer',
+        'gambar' => 'nullable|image|mimes:jpg,png,jpeg,gif',
+        'is_active' => 'required|boolean',
+         ]);
 
-        $barang = Barang::findOrFail($id);
-        $barang->update([
-            'nama_barang' => $request->nama,
-            'jumlah' => $request->jumlah,
-            'gambar' => $request->gambar,
-            'is_active' => $request->is_active,
-        ]);
+        // Update the barang data
+        $barang->nama_barang = $request->nama_barang;
+        $barang->jumlah = $request->jumlah;
+        $barang->is_active = $request->is_active;
 
-        return redirect()->route('edit.barang', $id)->with('success', 'Barang berhasil diperbarui!');
+        // Handle image upload if necessary
+        if ($request->hasFile('gambar')) {
+             $imagePath = $request->file('gambar')->store('images', 'public');
+            $barang->gambar = $imagePath;
+        }
 
+    // Save the updated record
+    $barang->save();
+
+    // Redirect back with a success message
+    return redirect()->route('read.barang')->with('success', 'Barang updated successfully');
     }
 
     public function destroy($id){

@@ -64,7 +64,7 @@
         <h2>Jumlah: {{ $barang->jumlah }} </h2>
         <img src="{{ asset($barang->gambar) }}" alt="">
         <br>
-        <a href="{{ route ('edit.barang',$barang->id)}}">Edit</a>
+        <a href="{{ route ('edit.barang', $barang->id)}}">Edit</a>
         <hr>
     @endforeach
 
