@@ -6,7 +6,7 @@
  <!-- Section untuk manggil yield content, penamaan yield dan section harus sama -->
     @section('content')
 
-    <div class="border-b border-gray-900/10 pb-12 bg-gray-500">
+    <div class="border-b border-gray-900/10 pb-12 bg-green-50">
       <h2 class="text-base/7 font-semibold text-gray-900">Personal Information</h2>
       <p class="mt-1 text-sm/6 text-gray-600">Use a permanent address where you can receive mail.</p>
 
