@@ -94,6 +94,16 @@ class BarangController extends Controller
     }
 
     public function destroy($id){
+        $barang = Barang::findOrFail($id);
+
+        // Delete the associated image file if it exists
+        if ($barang->gambar && file_exists(public_path($barang->gambar))) {
+            unlink(public_path($barang->gambar));
+        }
+
+        $barang->delete();
+
+        return redirect()->route('read.barang')->with('success', 'Barang deleted successfully.');
 
     }
     

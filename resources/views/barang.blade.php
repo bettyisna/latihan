@@ -6,11 +6,11 @@
  <!-- Section untuk manggil yield content, penamaan yield dan section harus sama -->
     @section('content')
 
-    <div class="border-b border-gray-900/10 pb-12 bg-green-50">
+    <div class="max-w-4xl mx-auto mt-10 bg-white p-6 rounded-lg shadow-md">
       <h2 class="text-base/7 font-semibold text-gray-900">Personal Information</h2>
       <p class="mt-1 text-sm/6 text-gray-600">Use a permanent address where you can receive mail.</p>
 
-      <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+    <div class="mt-10 grid grid-cols-1 gap-x-4 gap-y-4 sm:grid-cols-4">
     <form action="{{ route('create.barang') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
@@ -66,6 +66,12 @@
         <br>
         <a href="{{ route ('edit.barang', $barang->id)}}">Edit</a>
         <hr>
+        <!-- Delete Button -->
+        <form action="{{ route('delete.barang', $barang->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this item?');">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded">Delete</button>
+        </form>
     @endforeach
 
     @endsection
