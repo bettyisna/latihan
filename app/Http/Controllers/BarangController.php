@@ -3,14 +3,28 @@
 namespace App\Http\Controllers;
 
 use App\Models\Barang;
+use App\Models\KategoriBarang;
 use Illuminate\Http\Request;
 
 class BarangController extends Controller
 {
     public function index(){
         
-        $barangs = Barang::all();
+        $barangs = Barang::with('kategori')->get();
+
+        //$barang = Barang::with('kategori')->first();
+
+        //dd($barang);
+
+        //$kategori = KategoriBarang::with('barangs')->first();
         //$barang = Barang::first();
+        //dd($kategori);
+
+        //dd($kategori->barangs);
+
+        // foreach ($kategori->barangs as $bar){
+        //     dump($bar->nama_barang);
+        // }
 
         //dd($barang);
         return view("barang", compact('barangs'));

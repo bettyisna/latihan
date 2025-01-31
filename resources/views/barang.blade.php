@@ -66,6 +66,7 @@
         <br>
         <a href="{{ route ('edit.barang', $barang->id)}}">Edit</a>
         <hr>
+
         <!-- Delete Button -->
         <form action="{{ route('delete.barang', $barang->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this item?');">
             @csrf
@@ -75,4 +76,32 @@
     @endforeach
 
     @endsection
+    
+        <table class="table-fixed">
+          <tr>
+            <th>Nama Barang</th>
+            <th>Jumlah Barang</th>
+            <th>Gambar</th>
+            <th>Kategori</th>
+            <th>action</th>
+            <th>delete<th>
+          </tr>
+          @foreach ($barangs as $barang)
+          <tr>
+            <td>{{ $barang->nama_barang }}</td>
+            <td>{{ $barang->jumlah }}</td>
+            <td><img src="{{ asset($barang->gambar) }}" alt=""></td>
+            <td>{{ $barang->kategori->kategori}}</td>
+            <td><a href="{{ route ('edit.barang', $barang->id)}}">Edit</a></td>
+            <td>
+              <form action="{{ route('delete.barang', $barang->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="bg-red-500 text-black px-4 py-2 rounded">Delete</button>
+              </form>
+            </td>
+          </tr>
+          @endforeach
+        </table>
+    
 </div>
