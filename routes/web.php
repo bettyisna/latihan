@@ -23,6 +23,6 @@ Route::delete('/barang/{id}', [BarangController::class, 'destroy'])->name('delet
 //kategori
 Route::get('kategori', [KategoriController::class, 'index'])->name('read.kategori');
 Route::post('/kategori/create', [KategoriController::class,'create'])->name('create.kategori');
-//Route::get('/barang/{id}/edit', [BarangController::class, 'edit'])->name('edit.barang');
-//Route::put('/barang/{id}', [BarangController::class, 'update'])->name('update.barang');
+Route::get('/kategori/{id}/edit', [KategoriController::class, 'edit'])->name('edit.kategori');
+Route::put('/kategori/{id}', [KategoriController::class, 'update'])->name('update.kategori');
 //Route::delete('/barang/{id}', [BarangController::class, 'destroy'])->name('delete.barang');

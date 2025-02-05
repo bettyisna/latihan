@@ -34,6 +34,27 @@ class KategoriController extends Controller
         //dd($barang);
         //Storing to database ->save()
         $kategori->save();
+    }
     
-}
+    public function edit($id){
+        $kategori = KategoriBarang::find($id);
+        return view('editkategori', compact('kategori'));
+    
+    }
+    public function update(Request $request, $id){
+        //mencari id kategori
+        $kategori=KategoriBarang::find($id);
+
+        //validate
+        $request->validate([
+            'kategori'=>'required',
+        ]);
+
+        //update data
+        $kategori->kategori = $request->kategori;
+
+        //menyimpan data
+        $kategori->save();
+    }
+
 }
